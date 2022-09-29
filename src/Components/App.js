@@ -10,6 +10,10 @@ export default function App() {
     const [arrayIcones, setArrayIcones] = useState ([])
     const [progressoState, setProgresso] = useState ([])
     const [totalState, setTotal] = useState ([])
+    const [iniciar, setIniciar] = useState (false)
+    const [deck, setDeck] = useState ('')
+    const [meta, setMeta] = useState ('')
+    const [acertos, setAcertos] = useState (0)
 
     function iconesFooter(array){
         setArrayIcones(array)
@@ -20,18 +24,27 @@ export default function App() {
         setTotal(total)
     }
 
+    function deckEscolhido(deckParam){
+        console.log(deckParam)
+        setDeck(deckParam)
+    }
+
     return (
         <>
             <GlobalStyle/>
-            <BoasVindas/>
+            <BoasVindas setIniciar={setIniciar} setMeta={setMeta} deckEscolhido={deckEscolhido}/>
+            {
+            iniciar?
             <ScreenContainer>
                 <LogoContainer>
                     <img src={logo} alt = ""/>
                     <h1>ZapRecall</h1>
                 </LogoContainer>
-                <Perguntas iconesFooter={iconesFooter} progressoTotal={progressoTotal}></Perguntas>
-                <FooterConcluidos arrayIcones={arrayIcones} total={totalState} progresso={progressoState}></FooterConcluidos>
+                <Perguntas setAcertos={setAcertos} deck={deck} iconesFooter={iconesFooter} progressoTotal={progressoTotal}></Perguntas>
+                <FooterConcluidos acertos={acertos} meta={meta} arrayIcones={arrayIcones} total={totalState} progresso={progressoState}></FooterConcluidos>
             </ScreenContainer>
+            : true
+            }
         </>
     )
 }

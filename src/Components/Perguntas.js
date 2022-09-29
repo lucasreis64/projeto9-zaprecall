@@ -1,8 +1,7 @@
 import React, {useState} from "react"
 import styled from "styled-components"
-
 import Botoes from "./Botoes"
-import Questions from "../Auxiliares/PerguntasObj"
+import decks from "../Auxiliares/decks"
 import seta from "../assets/img/seta_play.png"
 import virar from "../assets/img/seta_virar.png"
 import erro from "../assets/img/icone_erro.png"
@@ -13,10 +12,12 @@ import indefinido from "../assets/img/icone_indefinido.png"
 const verde = "#2FBE34", amarelo = "#FF922E", vermelho = "#FF3030"/* , cinza = "#333333" */
 let simbolosArray = ['','','','','','','','']
 simbolosArray = simbolosArray.map(s=><img src={indefinido} alt=""/>)
-let progresso = 0
-export default function Perguntas({iconesFooter, progressoTotal}) {
-    
-    const perguntasMap = Questions.map((q, idx)=><Pergunta key={idx} iconesFooter={iconesFooter} progressoTotal={progressoTotal} pergunta={q.pergunta} resposta={q.resposta} idx={idx}/>)
+let progresso = 0, acertos=0;
+export default function Perguntas({iconesFooter, progressoTotal, deck, setAcertos}) {
+    const deckEscolhido = decks[deck]
+    console.log(deck)
+    const perguntasMap = deckEscolhido.map((d, idx)=><Pergunta key={idx} iconesFooter={iconesFooter} progressoTotal={progressoTotal} deckEscolhido={deckEscolhido}
+    pergunta={d.pergunta} resposta={d.resposta} idx={idx} setAcertos={setAcertos}/>)
     return (
         <>
             {perguntasMap}
@@ -25,14 +26,15 @@ export default function Perguntas({iconesFooter, progressoTotal}) {
 };
 
 
-function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal}) {
+function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal, deckEscolhido, setAcertos}) {
     const numeroPergunta = idx+1
     const questionamento = <PerguntaAberta><p>{resposta}</p> <Botoes enviarResposta={enviarResposta}/></PerguntaAberta>
     const perguntaAberta = (<PerguntaAberta><p>{pergunta}</p><img onClick={()=>setCaixaPergunta(questionamento)} src={virar} alt=""></img></PerguntaAberta>)
     const perguntaFechada = <PerguntaFechada><p>Pergunta {numeroPergunta}</p><img onClick={()=>setCaixaPergunta(perguntaAberta)} src={seta} alt=""></img></PerguntaFechada>
     const [caixaPergunta,setCaixaPergunta] = useState(perguntaFechada)
+    
 
-    progressoTotal(Questions.length, progresso)
+    progressoTotal(deckEscolhido.length, progresso)
 
     function enviarResposta (cor) {    
         if (cor==='vermelho'){
@@ -48,6 +50,7 @@ function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal}) {
         if (cor==='verde') {
             setCaixaPergunta(<PerguntaFechada riscado={true} cor={verde}><p>Pergunta {numeroPergunta}</p><img
             src={certo} alt=""></img></PerguntaFechada>)
+            setAcertos(acertos++)
             construirArrayIcons(certo)
         }
     }

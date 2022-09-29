@@ -1,12 +1,19 @@
 import styled from "styled-components"
 
-export default function FooterConcluidos({arrayIcones, total, progresso}) {
-    console.log(arrayIcones)
+export default function FooterConcluidos({arrayIcones, total, progresso, meta, acertos}) {
+    acertos = acertos + 1
+    /* function mensagemMeta () {
+        if (progresso===meta) {
+            if (acertos)
+        }
+        
+    } */
     return (
         <>
             <FooterConcluidosDiv margin={arrayIcones.length}>
                 <h2>{progresso}/{total} CONCLUIDOS</h2>
                 <IconesFooter margin={arrayIcones.length}>{arrayIcones.map((a)=>a)}</IconesFooter>
+                
             </FooterConcluidosDiv>
             
         </>
