@@ -1,21 +1,24 @@
 import styled from "styled-components"
 
-export default function FooterConcluidos() {
-    const verde = "#2FBE34", amarelo = "#FF922E", vermelho = "#FF3030"/* , cinza = "#333333" */
-
+export default function FooterConcluidos({arrayIcones, total, progresso}) {
+    console.log(arrayIcones)
     return (
         <>
-            <FooterConcluidosDiv>
-                <ContainerBotoes>
-                    <Button cor={vermelho}>Não lembrei</Button>
-                    <Button cor={amarelo}>Quase não lembrei</Button>
-                    <Button cor={verde}>Zap!</Button>
-                </ContainerBotoes>
-                <h2>{0}/{4} CONCLUIDOS</h2>
+            <FooterConcluidosDiv margin={arrayIcones.length}>
+                <h2>{progresso}/{total} CONCLUIDOS</h2>
+                <IconesFooter margin={arrayIcones.length}>{arrayIcones.map((a)=>a)}</IconesFooter>
             </FooterConcluidosDiv>
+            
         </>
     )
 };
+
+const IconesFooter = styled.div`
+    margin-top: ${props=>props.margin>0?'10px':'0px'};
+    display: flex;
+    gap: 5px;
+`
+
 
 const FooterConcluidosDiv = styled.div`
     width: 100%;
@@ -31,32 +34,7 @@ const FooterConcluidosDiv = styled.div`
     font-weight: 400;
     font-size: 18px;
     color: #333333;
-    padding: 10px;
+    height: 70px;
+    padding: ${props=>props.margin>0?'20px':'0px'};
 `
 
-const ContainerBotoes = styled.div`
-    display: flex;
-    width: 80%;
-    justify-content: space-between;
-    margin: 20px;
-`
-
-
-
-const Button = styled.button`
-        width: 90px;
-        font-family: 'Recursive';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-        background: ${props=>props.cor};
-        border-radius: 5px;
-        border: 1px solid ;
-        padding:5px;
-`
