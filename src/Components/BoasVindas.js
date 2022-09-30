@@ -15,7 +15,7 @@ export default function BoasVindas({setIniciar, deckEscolhido, setMeta}) {
             <h1>ZapRecall</h1>
             <select value={selectValue} onChange={e => setSelectValue(e.target.value)}>
                 <option value="" disabled selected>Selecione um deck:</option>
-                {nomeDecks.map(({value, name},index)=><option value={value}>{name}</option>)}
+                {nomeDecks.map(({value, name},index)=><option key={index} value={value}>{name}</option>)}
             </select>
             <select value={selectValueMeta} onChange={e => setSelectValueMeta(e.target.value)}>
                 <option value="" disabled selected>Defina sua meta:</option>

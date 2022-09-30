@@ -5,6 +5,7 @@ import FooterConcluidos from "./FooterConcluidos"
 import Perguntas from "./Perguntas.js"
 import GlobalStyle from './GlobalStyles';
 import BoasVindas from "./BoasVindas"
+import casa from "../assets/img/casa.png"
 
 export default function App() {
     const [arrayIcones, setArrayIcones] = useState ([])
@@ -35,6 +36,7 @@ export default function App() {
             {
             iniciar?
             <ScreenContainer>
+                <Home><img onClick={()=>window.location.reload()} src={casa} alt=""/></Home>
                 <LogoContainer>
                     <img src={logo} alt = ""/>
                     <h1>ZapRecall</h1>
@@ -48,6 +50,24 @@ export default function App() {
     )
 }
 
+const Home=styled.div`
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    img{
+        margin-bottom: 3px;
+        width: 30px;
+        height: 30px;
+    }
+`
 
 const ScreenContainer = styled.div`
 
@@ -78,5 +98,11 @@ const ScreenContainer = styled.div`
 const LogoContainer = styled.div`
     display: flex;
     align-items: center;
-    margin: 40px 0 20px 0;
+    justify-content: center;
+    padding: 40px 0 20px 0;
+    position: fixed;
+    background-color: #FB6B6B;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 2;
 `

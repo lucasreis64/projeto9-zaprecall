@@ -19,9 +19,9 @@ export default function Perguntas({iconesFooter, progressoTotal, deck, setAcerto
     const perguntasMap = deckEscolhido.map((d, idx)=><Pergunta key={idx} setAcertos={setAcertos} iconesFooter={iconesFooter} progressoTotal={progressoTotal} deckEscolhido={deckEscolhido}
     pergunta={d.pergunta} resposta={d.resposta} idx={idx}/>)
     return (
-        <>
+        <ContainerPerguntas>
             {perguntasMap}
-        </>
+        </ContainerPerguntas>
     )
 };
 
@@ -45,6 +45,8 @@ function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal, deckE
         if (cor==='amarelo'){
             setCaixaPergunta(<PerguntaFechada riscado={true} cor={amarelo}><p>Pergunta {numeroPergunta}</p><img
             src={quase} alt=""></img></PerguntaFechada>)
+            acerto = acerto + 1
+            setAcertos(acerto)
             construirArrayIcons(quase)
         }
         if (cor==='verde') {
@@ -69,6 +71,9 @@ function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal, deckE
     )
 }
 
+const ContainerPerguntas=styled.div`
+    margin-top: 220px;
+`
 
 const PerguntaFechada = styled.div`
     width: 300px;
