@@ -25,7 +25,6 @@ export default function App() {
     }
 
     function deckEscolhido(deckParam){
-        console.log(deckParam)
         setDeck(deckParam)
     }
 
@@ -41,13 +40,14 @@ export default function App() {
                     <h1>ZapRecall</h1>
                 </LogoContainer>
                 <Perguntas setAcertos={setAcertos} deck={deck} iconesFooter={iconesFooter} progressoTotal={progressoTotal}></Perguntas>
-                <FooterConcluidos acertos={acertos} meta={meta} arrayIcones={arrayIcones} total={totalState} progresso={progressoState}></FooterConcluidos>
+                <FooterConcluidos iniciar={iniciar} acertos={acertos} meta={meta} arrayIcones={arrayIcones} total={totalState} progresso={progressoState}></FooterConcluidos>
             </ScreenContainer>
             : true
             }
         </>
     )
 }
+
 
 const ScreenContainer = styled.div`
 

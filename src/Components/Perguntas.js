@@ -12,12 +12,12 @@ import indefinido from "../assets/img/icone_indefinido.png"
 const verde = "#2FBE34", amarelo = "#FF922E", vermelho = "#FF3030"/* , cinza = "#333333" */
 let simbolosArray = ['','','','','','','','']
 simbolosArray = simbolosArray.map(s=><img src={indefinido} alt=""/>)
-let progresso = 0, acertos=0;
+let progresso = 0, acerto = 0
 export default function Perguntas({iconesFooter, progressoTotal, deck, setAcertos}) {
     const deckEscolhido = decks[deck]
     console.log(deck)
-    const perguntasMap = deckEscolhido.map((d, idx)=><Pergunta key={idx} iconesFooter={iconesFooter} progressoTotal={progressoTotal} deckEscolhido={deckEscolhido}
-    pergunta={d.pergunta} resposta={d.resposta} idx={idx} setAcertos={setAcertos}/>)
+    const perguntasMap = deckEscolhido.map((d, idx)=><Pergunta key={idx} setAcertos={setAcertos} iconesFooter={iconesFooter} progressoTotal={progressoTotal} deckEscolhido={deckEscolhido}
+    pergunta={d.pergunta} resposta={d.resposta} idx={idx}/>)
     return (
         <>
             {perguntasMap}
@@ -50,7 +50,8 @@ function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal, deckE
         if (cor==='verde') {
             setCaixaPergunta(<PerguntaFechada riscado={true} cor={verde}><p>Pergunta {numeroPergunta}</p><img
             src={certo} alt=""></img></PerguntaFechada>)
-            setAcertos(acertos++)
+            acerto = acerto + 1
+            setAcertos(acerto)
             construirArrayIcons(certo)
         }
     }
