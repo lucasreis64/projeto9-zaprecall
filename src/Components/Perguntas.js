@@ -11,11 +11,16 @@ import indefinido from "../assets/img/icone_indefinido.png"
 import ReactCardFlip from "react-card-flip";
 
 const verde = "#2FBE34", amarelo = "#FF922E", vermelho = "#FF3030"/* , cinza = "#333333" */
-let simbolosArray = ['','','','','','','','']
-simbolosArray = simbolosArray.map(s=><img src={indefinido} alt=""/>)
+let simbolosArray;
 let progresso = 0, acerto = 0
+let round = 1;
 export default function Perguntas({iconesFooter, progressoTotal, deck, setAcertos}) {
     const deckEscolhido = decks[deck]
+    if (round === 1){
+        simbolosArray = deckEscolhido.map((d)=>"")
+        simbolosArray = simbolosArray.map(s=><img src={indefinido} alt=""/>)
+        round++;
+    }
     console.log(deck)
     const perguntasMap = deckEscolhido.map((d, idx)=><Pergunta key={idx} setAcertos={setAcertos} iconesFooter={iconesFooter} progressoTotal={progressoTotal} deckEscolhido={deckEscolhido}
     pergunta={d.pergunta} resposta={d.resposta} idx={idx}/>)
@@ -108,7 +113,6 @@ const mostrarConteudoPergunta = keyframes`
         transform: translateY(10%);
         opacity: 1;
     }
-
 `
 const mostrarConteudoIcone = keyframes`
     0% {
