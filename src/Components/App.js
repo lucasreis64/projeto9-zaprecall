@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, {keyframes} from "styled-components"
 import React, {useState} from "react"
 import logo from "../assets/img/logo.png"
 import FooterConcluidos from "./FooterConcluidos"
@@ -50,6 +50,16 @@ export default function App() {
     )
 }
 
+const opacidade = keyframes`
+    from{opacity:0;}
+    to{opacity:1;}
+`
+
+const trovao = keyframes`
+    from{filter: brightness(0.7);}
+    to{filter: brightness(1);}
+`
+
 const Home=styled.div`
     position: fixed;
     top: 20px;
@@ -80,6 +90,7 @@ const ScreenContainer = styled.div`
     margin: 0px;
     padding: 0px;
     padding-bottom: 200px;
+    animation: ${opacidade} 1s;
     .logo-container img {
         width: 52px;
     }
@@ -105,4 +116,9 @@ const LogoContainer = styled.div`
     width: 100%;
     box-sizing: border-box;
     z-index: 2;
+    font-size: 36px;
+    img{
+        animation: ${trovao} 300ms infinite;
+        height: 60px;
+    }
 `

@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, {keyframes} from "styled-components"
 
 
 export default function FooterConcluidos({arrayIcones, total, progresso, meta, acertos}) {
@@ -48,7 +48,6 @@ function MensagemMeta ({progresso, acertos, meta, total}) {
     }
 
 }
-
 
 const IconesFooter = styled.div`
     margin-top: ${props=>props.margin>0?'10px':'0px'};

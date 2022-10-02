@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import logo from "../assets/img/logo.png"
 import React, {useState} from "react"
 import decks from "../Auxiliares/decks"
@@ -13,11 +13,11 @@ export default function BoasVindas({setIniciar, deckEscolhido, setMeta}) {
         <TelaInicial iniciarApp={iniciarApp} selectValue={selectValue} selectValueMeta={selectValueMeta}>
             <img src={logo} alt=""/>
             <h1>ZapRecall</h1>
-            <select value={selectValue} onChange={e => setSelectValue(e.target.value)}>
+            <select className="um" value={selectValue} onChange={e => setSelectValue(e.target.value)}>
                 <option value="" disabled selected>Selecione um deck:</option>
                 {nomeDecks.map(({value, name},index)=><option key={index} value={value}>{name}</option>)}
             </select>
-            <select value={selectValueMeta} onChange={e => setSelectValueMeta(e.target.value)}>
+            <select className="dois" value={selectValueMeta} onChange={e => setSelectValueMeta(e.target.value)}>
                 <option value="" disabled selected>Defina sua meta:</option>
                 {(selectValue==='')?true:decks[selectValue].map((d,index)=><option value={index+1}>{index+1}</option>)}
             </select>
@@ -27,6 +27,22 @@ export default function BoasVindas({setIniciar, deckEscolhido, setMeta}) {
         </TelaInicial>
     )
 }
+
+let tempoMs = 400;
+function tempo() {
+    tempoMs+=200
+    return tempoMs+'ms'
+}
+
+const trovao = keyframes`
+    from{filter: brightness(0.7);}
+    to{filter: brightness(1);}
+`
+
+const mostrarPerguntas = keyframes`
+    from{opacity:0;transform: translateY(-600px)}
+    to{opacity:1;transform: translateY(0px)}
+`
 
 const TelaInicial = styled.div`
     position: fixed;
@@ -46,23 +62,23 @@ const TelaInicial = styled.div`
     font-weight: 400;
     font-size: 36px;
     color: white;
-
+    animation: ${mostrarPerguntas} ${tempo};
     img{
         width: 136px;
         height: 161px;
+        animation: ${mostrarPerguntas} ${tempo}, ${trovao} 300ms infinite;
     }
 
-    button{
-        width: 246px;
-        height: 54px;
-        background: ${props=>props.selectValue===''||props.selectValueMeta===''?'rgb(201, 201, 201)':'white'};
-        border: 1px solid #D70900;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-        border-radius: 5px;
-        font-family: 'Recursive';
-        font-weight: 400;
-        font-size: 18px;
-        color: #D70900;
+    h1{
+        animation: ${mostrarPerguntas} ${tempo};
+    }
+
+    .um{
+        animation: ${mostrarPerguntas} ${tempo};
+    }
+
+    .dois{
+        animation: ${mostrarPerguntas} ${tempo};
     }
 
     select{
@@ -77,6 +93,22 @@ const TelaInicial = styled.div`
         color: #ADADAD;
         outline: none;
     }
+
+    button{
+        width: 246px;
+        height: 54px;
+        background: ${props=>props.selectValue===''||props.selectValueMeta===''?'rgb(201, 201, 201)':'white'};
+        border: 1px solid #D70900;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+        border-radius: 5px;
+        font-family: 'Recursive';
+        font-weight: 400;
+        font-size: 18px;
+        color: #D70900;
+        animation: ${mostrarPerguntas} ${tempo};
+    }
+
+    
     option{
         font-family: 'Recursive';
         font-weight: 400;
