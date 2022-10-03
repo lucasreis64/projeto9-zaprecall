@@ -60,8 +60,6 @@ function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal, deckE
         if (cor==='amarelo'){
             setTimeout(()=>setCaixaPergunta(<PerguntaFechada close={true} riscado={true} cor={amarelo}><p>Pergunta {numeroPergunta}</p><img
             src={quase} alt=""></img></PerguntaFechada>), 1500)
-            acerto = acerto + 1
-            setAcertos(acerto)
             construirArrayIcons(quase)
         }
         if (cor==='verde') {
