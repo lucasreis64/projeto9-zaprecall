@@ -197,6 +197,10 @@ const PerguntaAberta = styled.div`
     justify-content: space-between;
     animation: ${props=>props.anime? mostrarConteudoPergunta: 'none'} ${props=>props.anime? '500ms': 'none'};
 
+    p{
+        margin-bottom: 10px;
+    }
+
     img{
         position: absolute;
         bottom: 10px;
