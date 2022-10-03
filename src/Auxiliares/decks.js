@@ -10,10 +10,16 @@ const decks = [
         {pergunta: "Usamos estado (state) para __", resposta:"dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"}
     ],
     [
-        {pergunta: "O ReactDOM nos ajuda __", resposta:"interagindo com a DOM para colocar componentes React na mesma"},
-        {pergunta: "Usamos o npm para __", resposta:"gerenciar os pacotes necessários e suas dependências"},
-        {pergunta: "Usamos props para __", resposta:"passar diferentes informações para componentes "},
-        {pergunta: "Usamos estado (state) para __", resposta:"dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"}
+        {pergunta: "Sarutobi Azuma foi morto por quem na temporada Shippuuden?", resposta: "Hidan"},
+        {pergunta: "Naruto tinha laços muito fortes com Sasuke. Esses laços foram quebrados em qual Vale?", resposta: "Vale do Fim"},
+        {pergunta: "Quem é a paixão de Hinata?", resposta: "Naruto"},
+        {pergunta: "Quando Naruto e Sasuke brigaram, Naruto antes de perder a luta deixou algo na bandana de Sasuke, o que foi?", resposta: "Deixou um risco reto"},
+        {pergunta: "Quem lutou e derrotou o Sasori?", resposta: "Sakura e Chiyo-baa"},
+        {pergunta: "Gaara foi capturado por quais integrantes da Akatsuki?", resposta: "Sasori e Deidara"},
+        {pergunta: "Qual é o nome da cobra do Orochimaru?", resposta: "Manda"},
+        {pergunta: "Quem ensinou o rasengan para o Naruto?", resposta: "Jiraya"},
+        {pergunta: "Naruto usa roupas de que cor na temporada Shippuuden?", resposta: "Laranja e preto"},
+        {pergunta: "Sasuke, em busca de integrantes para seu novo time, decide convidar 3 pessoas. Quais os nomes dessas pessoas?", resposta: "Karin, Juugo e Suigetsu"}
     ],
     [
         {pergunta: "O que é placa bacteriana?", resposta: "A placa bacteriana ou biofilme é uma película transparente formada por bactérias e resíduos alimentares que se alojam sobre os dentes. Caso não seja removida diariamente através da escovação, pode causar gengivite e/ou doença periodontal."},
