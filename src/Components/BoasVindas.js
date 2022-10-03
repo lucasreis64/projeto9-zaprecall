@@ -1,8 +1,10 @@
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
+import {animations} from "../Auxiliares/animations.js"
 import logo from "../assets/img/logo.png"
 import React, {useState} from "react"
 import decks from "../Auxiliares/decks"
 import nomeDecks from "../Auxiliares/nomeDecks";
+const {trovao, deslizarCima} = animations
 
 export default function BoasVindas({setIniciar, deckEscolhido, setMeta}) {
     const [iniciarApp, setIniciarApp] = useState(false)
@@ -34,16 +36,6 @@ function tempo() {
     return tempoMs+'ms'
 }
 
-const trovao = keyframes`
-    from{filter: brightness(0.7);}
-    to{filter: brightness(1);}
-`
-
-const mostrarPerguntas = keyframes`
-    from{opacity:0;transform: translateY(-600px)}
-    to{opacity:1;transform: translateY(0px)}
-`
-
 const TelaInicial = styled.div`
     position: fixed;
     width: 100%;
@@ -62,23 +54,23 @@ const TelaInicial = styled.div`
     font-weight: 400;
     font-size: 36px;
     color: white;
-    animation: ${mostrarPerguntas} ${tempo};
+    animation: ${deslizarCima} ${tempo};
     img{
         width: 136px;
         height: 161px;
-        animation: ${mostrarPerguntas} ${tempo}, ${trovao} 300ms infinite;
+        animation: ${deslizarCima} ${tempo}, ${trovao} 300ms infinite;
     }
 
     h1{
-        animation: ${mostrarPerguntas} ${tempo};
+        animation: ${deslizarCima} ${tempo};
     }
 
     .um{
-        animation: ${mostrarPerguntas} ${tempo};
+        animation: ${deslizarCima} ${tempo};
     }
 
     .dois{
-        animation: ${mostrarPerguntas} ${tempo};
+        animation: ${deslizarCima} ${tempo};
     }
 
     select{
@@ -105,7 +97,7 @@ const TelaInicial = styled.div`
         font-weight: 400;
         font-size: 18px;
         color: #D70900;
-        animation: ${mostrarPerguntas} ${tempo};
+        animation: ${deslizarCima} ${tempo};
     }
 
     

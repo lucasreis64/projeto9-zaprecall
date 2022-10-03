@@ -1,5 +1,6 @@
 import React, {useState} from "react"
-import styled, {keyframes} from "styled-components"
+import styled from "styled-components"
+import {animations} from "../Auxiliares/animations.js"
 import Botoes from "./Botoes"
 import decks from "../Auxiliares/decks"
 import seta from "../assets/img/seta_play.png"
@@ -9,7 +10,7 @@ import certo from "../assets/img/icone_certo.png"
 import quase from "../assets/img/icone_quase.png"
 import indefinido from "../assets/img/icone_indefinido.png"
 import ReactCardFlip from "react-card-flip";
-
+const {variarQuatroVezes, variarSeisVezes, deslizarEsquerda} = animations
 const verde = "#2FBE34", amarelo = "#FF922E", vermelho = "#FF3030"/* , cinza = "#333333" */
 let simbolosArray;
 let progresso = 0, acerto = 0
@@ -91,59 +92,7 @@ function tempo() {
     return tempoMs+'ms'
 }
 
-const mostrarPerguntas = keyframes`
-    from{opacity:0; transform: translateX(-600px)}
-    to{opacity:1; transform: translateX(-0px)}
-`
 
-const mostrarConteudoPergunta = keyframes`
-    0% {
-        transform: translateY(-20%);
-        opacity: 0.2;
-    }
-    50% {
-        transform: translateY(20%);
-        opacity: 0.5;
-    }
-    75% {
-        transform: translateY(-10%);
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateY(10%);
-        opacity: 1;
-    }
-`
-const mostrarConteudoIcone = keyframes`
-    0% {
-        transform: translateY(-100%);
-        opacity: 0.2;
-    }
-    17% {
-        transform: translateY(100%);
-        opacity: 0.5;
-    }
-    34% {
-        transform: translateY(-60%);
-        opacity: 0.7;
-    }
-    51% {
-        transform: translateY(60%);
-        opacity: 1;
-    }
-    68%{
-        transform: translateY(-30%);
-        opacity: 1;
-    }
-    85%{
-        transform: translateY(30%);
-        opacity: 1;
-    }
-    100%{
-        transform: translateY(0%);
-        opacity: 1;
-    }
-`
 
 
 const ContainerPerguntas=styled.div`
@@ -151,7 +100,7 @@ const ContainerPerguntas=styled.div`
 `
 
 const Img = styled.img`
-    animation: ${mostrarConteudoIcone} 500ms;
+    animation: ${variarSeisVezes} 500ms;
 `
 
 const PerguntaFechada = styled.div`
@@ -165,7 +114,7 @@ const PerguntaFechada = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    animation: ${mostrarPerguntas} ${props=>props.close? '500ms' : tempo};
+    animation: ${deslizarEsquerda} ${props=>props.close? '500ms' : tempo};
 
     p {
         text-decoration: ${props=>props.riscado?'line-through':'none'};
@@ -195,7 +144,7 @@ const PerguntaAberta = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    animation: ${props=>props.anime? mostrarConteudoPergunta: 'none'} ${props=>props.anime? '500ms': 'none'};
+    animation: ${props=>props.anime? variarQuatroVezes: 'none'} ${props=>props.anime? '500ms': 'none'};
 
     p{
         margin-bottom: 10px;
