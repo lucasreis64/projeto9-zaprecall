@@ -1,12 +1,13 @@
-import styled, {keyframes} from "styled-components"
+import styled from "styled-components"
 import React, {useState} from "react"
+import {animations} from "../Auxiliares/animations.js"
 import logo from "../assets/img/logo.png"
 import FooterConcluidos from "./FooterConcluidos"
 import Perguntas from "./Perguntas.js"
 import GlobalStyle from './GlobalStyles';
 import BoasVindas from "./BoasVindas"
 import casa from "../assets/img/casa.png"
-
+const {trovao, opacidade, tremerZoom} = animations
 export default function App() {
     const [arrayIcones, setArrayIcones] = useState ([])
     const [progressoState, setProgresso] = useState ([])
@@ -49,16 +50,6 @@ export default function App() {
         </>
     )
 }
-
-const opacidade = keyframes`
-    from{opacity:0;}
-    to{opacity:1;}
-`
-
-const trovao = keyframes`
-    from{filter: brightness(0.7);}
-    to{filter: brightness(1);}
-`
 
 const Home=styled.div`
     position: fixed;
@@ -103,6 +94,7 @@ const ScreenContainer = styled.div`
         line-height: 45px;
         color: #FFFFFF;
         margin-left: 20px;
+        animation: ${tremerZoom} ${'500ms'} 1 ${'1000ms'};
     }
 `
 

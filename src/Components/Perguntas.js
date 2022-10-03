@@ -10,7 +10,7 @@ import certo from "../assets/img/icone_certo.png"
 import quase from "../assets/img/icone_quase.png"
 import indefinido from "../assets/img/icone_indefinido.png"
 import ReactCardFlip from "react-card-flip";
-const {variarQuatroVezes, variarSeisVezes, deslizarEsquerda} = animations
+const {variarQuatroVezes, variarSeisVezes, deslizarEsquerda, rolarCair} = animations
 const verde = "#2FBE34", amarelo = "#FF922E", vermelho = "#FF3030"/* , cinza = "#333333" */
 let simbolosArray;
 let progresso = 0, acerto = 0
@@ -35,30 +35,38 @@ export default function Perguntas({iconesFooter, progressoTotal, deck, setAcerto
 
 function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal, deckEscolhido, setAcertos}) {    
     const numeroPergunta = idx+1
-    const perguntaFechada = <PerguntaFechada><p>Pergunta {numeroPergunta}</p><img 
-    onClick={()=>setCaixaPergunta(<PerguntaAbertaDiv pergunta={pergunta} resposta={resposta} enviarResposta={enviarResposta}></PerguntaAbertaDiv>)} src={seta} alt=""></img></PerguntaFechada>
+    const perguntaFechada = <PerguntaFechada abrir={false}><p>Pergunta {numeroPergunta}</p><img 
+    onClick={()=>abrirPergunta()} src={seta} alt=""></img></PerguntaFechada>
     const [caixaPergunta,setCaixaPergunta] = useState(perguntaFechada)
     
-    
+    function fecharPergunta (color) {
+        setCaixaPergunta(<PerguntaAberta anime={true} fechar={true}><p>{resposta}</p> <Botoes/></PerguntaAberta>)
+        enviarResposta(color)
+    }
+    function abrirPergunta () {
+        setCaixaPergunta(<PerguntaFechada abrir={true}><p>Pergunta {numeroPergunta}</p><img 
+        onClick={()=>abrirPergunta()} src={seta} alt=""></img></PerguntaFechada>)
+        setTimeout(()=>setCaixaPergunta(<PerguntaAbertaDiv pergunta={pergunta} resposta={resposta} fecharPergunta={fecharPergunta}></PerguntaAbertaDiv>), 1500)
+    }
 
     progressoTotal(deckEscolhido.length, progresso)
 
     function enviarResposta (cor) {    
         if (cor==='vermelho'){
-            setCaixaPergunta(<PerguntaFechada close={true} riscado={true} cor={vermelho}><p>Pergunta {numeroPergunta}</p><img
-            src={erro} alt=""></img></PerguntaFechada>); 
+            setTimeout(()=>setCaixaPergunta(<PerguntaFechada close={true} riscado={true} cor={vermelho}><p>Pergunta {numeroPergunta}</p><img
+            src={erro} alt=""></img></PerguntaFechada>), 1500) 
             construirArrayIcons(erro)
         }
         if (cor==='amarelo'){
-            setCaixaPergunta(<PerguntaFechada close={true} riscado={true} cor={amarelo}><p>Pergunta {numeroPergunta}</p><img
-            src={quase} alt=""></img></PerguntaFechada>)
+            setTimeout(()=>setCaixaPergunta(<PerguntaFechada close={true} riscado={true} cor={amarelo}><p>Pergunta {numeroPergunta}</p><img
+            src={quase} alt=""></img></PerguntaFechada>), 1500)
             acerto = acerto + 1
             setAcertos(acerto)
             construirArrayIcons(quase)
         }
         if (cor==='verde') {
-            setCaixaPergunta(<PerguntaFechada close={true} riscado={true} cor={verde}><p>Pergunta {numeroPergunta}</p><img
-            src={certo} alt=""></img></PerguntaFechada>)
+            setTimeout(()=>setCaixaPergunta(<PerguntaFechada close={true} riscado={true} cor={verde}><p>Pergunta {numeroPergunta}</p><img
+            src={certo} alt=""></img></PerguntaFechada>), 1500)
             acerto = acerto + 1
             setAcertos(acerto)
             construirArrayIcons(certo)
@@ -78,12 +86,12 @@ function Pergunta ({pergunta, resposta, idx, iconesFooter, progressoTotal, deckE
     )
 }
 
-function PerguntaAbertaDiv ({pergunta, resposta, enviarResposta}) {
+function PerguntaAbertaDiv ({pergunta, resposta, fecharPergunta}) {
     const [flip, setFlip] = useState(false)
     return (
     <ReactCardFlip isFlipped={flip} flipDirection="horizontal">
-        <PerguntaAberta anime={true}><p>{pergunta}</p><img onClick={()=>setFlip(!flip)} src={virar} alt=""></img></PerguntaAberta>
-        <PerguntaAberta><p>{resposta}</p> <Botoes enviarResposta={enviarResposta}/></PerguntaAberta>
+        <PerguntaAberta fechar={false} anime={true}><p>{pergunta}</p><img onClick={()=>setFlip(!flip)} src={virar} alt=""></img></PerguntaAberta>
+        <PerguntaAberta fechar={false}><p>{resposta}</p> <Botoes fecharPergunta={fecharPergunta}/></PerguntaAberta>
     </ReactCardFlip>)
 }
 let tempoMs = 400;
@@ -114,7 +122,7 @@ const PerguntaFechada = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    animation: ${deslizarEsquerda} ${props=>props.close? '500ms' : tempo};
+    animation: ${props=>props.abrir? rolarCair : deslizarEsquerda} ${props=>props.close? '500ms' : (props.abrir?'1500ms':tempo)};
 
     p {
         text-decoration: ${props=>props.riscado?'line-through':'none'};
@@ -144,7 +152,7 @@ const PerguntaAberta = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    animation: ${props=>props.anime? variarQuatroVezes: 'none'} ${props=>props.anime? '500ms': 'none'};
+    animation: ${props=>props.anime? (props.fechar?rolarCair : variarQuatroVezes): 'none'} ${props=>props.anime? (props.fechar?'1500ms':'500ms'): 'none'};
 
     p{
         margin-bottom: 10px;

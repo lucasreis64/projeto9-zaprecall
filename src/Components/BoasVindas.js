@@ -4,7 +4,7 @@ import logo from "../assets/img/logo.png"
 import React, {useState} from "react"
 import decks from "../Auxiliares/decks"
 import nomeDecks from "../Auxiliares/nomeDecks";
-const {trovao, deslizarCima} = animations
+const {trovao, deslizarCima, tremerZoom} = animations
 
 export default function BoasVindas({setIniciar, deckEscolhido, setMeta}) {
     const [iniciarApp, setIniciarApp] = useState(false)
@@ -62,7 +62,7 @@ const TelaInicial = styled.div`
     }
 
     h1{
-        animation: ${deslizarCima} ${tempo};
+        animation: ${deslizarCima} ${tempo}, ${tremerZoom} ${'500ms'} 1 ${tempo};
     }
 
     .um{

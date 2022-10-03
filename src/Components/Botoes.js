@@ -1,13 +1,13 @@
 import styled from "styled-components"
 
-export default function Botoes({enviarResposta}) {
+export default function Botoes({fecharPergunta}) {
     const verde = "#2FBE34", amarelo = "#FF922E", vermelho = "#FF3030"/* , cinza = "#333333" */
 
     return (
         <ContainerBotoes>
-            <Button onClick = {()=>enviarResposta('vermelho')} cor={vermelho}>Não lembrei</Button>
-            <Button onClick = {()=>enviarResposta('amarelo')} cor={amarelo}>Quase não lembrei</Button>
-            <Button onClick = {()=>enviarResposta('verde')} cor={verde}>Zap!</Button>
+            <Button onClick = {()=>fecharPergunta('vermelho')} cor={vermelho}>Não lembrei</Button>
+            <Button onClick = {()=>fecharPergunta('amarelo')} cor={amarelo}>Quase não lembrei</Button>
+            <Button onClick = {()=>fecharPergunta('verde')} cor={verde}>Zap!</Button>
         </ContainerBotoes>
     )
 }
