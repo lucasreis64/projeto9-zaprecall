@@ -23,11 +23,11 @@ export default function Perguntas({iconesFooter, progressoTotal, deck, setAcerto
         round++;
     }
     console.log(deck)
-    const perguntasMap = deckEscolhido.map((d, idx)=><Pergunta key={idx} setAcertos={setAcertos} iconesFooter={iconesFooter} progressoTotal={progressoTotal} deckEscolhido={deckEscolhido}
-    pergunta={d.pergunta} resposta={d.resposta} idx={idx}/>)
+
     return (
         <ContainerPerguntas>
-            {perguntasMap}
+            {deckEscolhido.map((d, idx)=><Pergunta key={idx} setAcertos={setAcertos} iconesFooter={iconesFooter} progressoTotal={progressoTotal} deckEscolhido={deckEscolhido}
+            pergunta={d.pergunta} resposta={d.resposta} idx={idx}/>)}
         </ContainerPerguntas>
     )
 };
